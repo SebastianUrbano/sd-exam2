@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+        mysql:
+                image: mysql:5.7
+                ports:
+                        - "3386":"3386"
+                restart: always
+                enviroment:
+                        MYSQL_ROOT_PASSWORD: dummypassword
+                        MYSQL_USER: todos-user
+                        MYSQL_PASSWORD: dummytodos
+                        MYSQL_DATABASE: todos
+                mem_limit: 20m
+
+        web:
+                image: 127.0.0.1:5000/stackdemo
+                build: .
+                ports:
+                        - "8000:8000"
+                redis:
+                image: redis:alpine
+                mem_limit: 20m
